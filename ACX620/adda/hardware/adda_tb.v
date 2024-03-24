@@ -14,7 +14,7 @@ module adda_tb;
 	wire o_adc_sclk;
 	wire o_adc_din;
 	reg i_adc_dout;
-
+	wire o_txd;
 	
 adda adda(
 	.i_clk(i_clk),
@@ -24,9 +24,12 @@ adda adda(
 	.o_adc_cs_n(o_adc_cs_n),
 	.o_adc_sclk(o_adc_sclk),
 	.o_adc_din(o_adc_din),
-	.i_adc_dout(i_adc_dout)
+	.i_adc_dout(i_adc_dout),
+	.o_txd(o_txd)
 
 );
+
+
 
 
 	reg [2:0]adc_addr;

@@ -54,10 +54,7 @@ set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
 set_location_assignment PIN_E1 -to i_clk
-set_location_assignment PIN_M16 -to i_rst_n
-set_location_assignment PIN_E8 -to o_cs_n
-set_location_assignment PIN_C8 -to o_din
-set_location_assignment PIN_E7 -to o_sclk
+set_location_assignment PIN_E16 -to i_rst_n
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
 set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH adda_tb -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME adda_tb -section_id eda_simulation
@@ -67,7 +64,6 @@ set_global_assignment -name EDA_TEST_BENCH_FILE hardware/adda_tb.v -section_id a
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name VERILOG_FILE hardware/uart_txd.v
 set_global_assignment -name VERILOG_FILE hardware/data_handle.v
 set_global_assignment -name VERILOG_FILE hardware/adda_tb.v
@@ -76,3 +72,12 @@ set_global_assignment -name VERILOG_FILE hardware/key_filter.v
 set_global_assignment -name VERILOG_FILE hardware/tlv5618_driver.v
 set_global_assignment -name VERILOG_FILE hardware/adc128s102_driver.v
 set_global_assignment -name VERILOG_FILE hardware/adc_ctrl.v
+set_global_assignment -name QIP_FILE ip/FIFO.qip
+set_global_assignment -name QIP_FILE ip/issp.qip
+set_location_assignment PIN_B7 -to o_adc_sclk
+set_location_assignment PIN_M16 -to i_key
+set_location_assignment PIN_D9 -to o_adc_cs_n
+set_location_assignment PIN_C9 -to o_adc_din
+set_location_assignment PIN_E9 -to i_adc_dout
+set_location_assignment PIN_A6 -to o_txd
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -93,15 +93,15 @@ adc128s102_driver adc_driver(
 		case(r_current_state)
 			S_IDLE: begin
 				if(key_press_valid_go == 1'b1)
-					r_next_state <= S_START;
+					r_next_state = S_START;
 				else
-					r_next_state <= S_IDLE;
+					r_next_state = S_IDLE;
 			end
 			S_START: begin
 				if(w_adc_data_convert_valid_go == 1'b1)
-					r_next_state <= S_SAMPLE;
+					r_next_state = S_SAMPLE;
 				else
-					r_next_state <= S_START;
+					r_next_state = S_START;
 			end
 			S_SAMPLE: begin
 				if(r_sample_cnt == ADC_COLLECT_TIMES)
@@ -111,11 +111,11 @@ adc128s102_driver adc_driver(
 			end
 			S_DONE: begin
 				if(w_adc_convert_busy_nedge == 1'b1)
-					r_next_state <= S_IDLE;
+					r_next_state = S_IDLE;
 				else
-					r_next_state <= S_DONE;
+					r_next_state = S_DONE;
 			end
-		default: r_next_state <= S_IDLE;
+		default: r_next_state = S_IDLE;
 		endcase
 	end
 	

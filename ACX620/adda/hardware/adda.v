@@ -10,7 +10,8 @@ module adda(
 	o_adc_cs_n,
 	o_adc_sclk,
 	o_adc_din,
-	i_adc_dout
+	i_adc_dout,
+	o_txd
 
 );
 	
@@ -29,6 +30,7 @@ module adda(
 	output o_adc_sclk;
 	output o_adc_din;
 	input i_adc_dout;
+	output o_txd;
 	
 	
 
@@ -61,14 +63,43 @@ adc_ctrl adc_ctrl(
 );
 
 
+wire [7:0] w_uart_txd_data;
+wire w_uart_txd_en_go;
+wire w_uart_txd_busy;
+
+data_handle data_handle(
+	.clk(i_clk),
+	.rst_n(i_rst_n),
+	.adc_data(w_adc_data),
+	.adc_data_valid_go(w_adc_data_valid_go),
+	.txd_data(w_uart_txd_data),
+	.txd_en_go(w_uart_txd_en_go),
+	.txd_busy(w_uart_txd_busy)
+);
 
 
 
-	
+	localparam P_EVEN = 2'b00;
+	localparam P_ODD  = 2'b01;
+	localparam P_NONE = 2'b10;
+uart_txd uart_txd(
+	.clk(i_clk),
+	.rst_n(i_rst_n),
+	.txd_data(w_uart_txd_data),
+	.txd_en_go(w_uart_txd_en_go),
+	.parity(P_NONE),
+	.txd(o_txd),
+	.txd_busy(w_uart_txd_busy)
+);
 
 	
-	
-	
+//
+//	issp issp(
+//	.probe(w_adc_data),
+//	.source()
+//	);
+//	
+//	
 	
 	
 	

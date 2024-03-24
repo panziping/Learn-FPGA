@@ -27,10 +27,10 @@ module uart_txd(
 	reg [3:0] r_bit_width;
 	always@(*) begin
 		case(parity)
-		P_EVEN : r_bit_width = 4'd11;
-		P_ODD  : r_bit_width = 4'd11;
-		P_NONE : r_bit_width = 4'd10;
-		default :r_bit_width = 4'd10;
+		P_EVEN : r_bit_width = 4'd12;
+		P_ODD  : r_bit_width = 4'd12;
+		P_NONE : r_bit_width = 4'd11;
+		default :r_bit_width = 4'd11;
 		endcase
 	end
 	
@@ -123,6 +123,7 @@ module uart_txd(
 					endcase
 				end
 				11: begin r_txd <= 1'd1; end
+				12: begin r_txd <= 1'd1; end
 				default:begin r_txd <= 1'd1; end
 			endcase
 		end
