@@ -56,12 +56,11 @@ module data_handle(
 	
 	
 	
-	localparam S_IDLE = 4'b0001;
-	localparam S_LB   = 4'b0010;
-	localparam S_HB   = 4'b0100;
-	localparam S_END  = 4'b1000;
-	reg [3:0] r_current_state;
-	reg [3:0] r_next_state;
+	localparam S_IDLE = 3'b001;
+	localparam S_LB   = 3'b010;
+	localparam S_HB   = 3'b100;
+	reg [2:0] r_current_state;
+	reg [2:0] r_next_state;
 	always@(posedge clk or negedge rst_n) begin
 		if(!rst_n)
 			r_current_state <= S_IDLE;
@@ -85,12 +84,10 @@ module data_handle(
 			end
 			S_HB: begin
 				if(w_txd_busy_nedge==1'b1)
-					r_next_state = S_END;
+					r_next_state = S_IDLE;
 				else
 					r_next_state = S_HB;
 			end
-			S_END:
-				r_next_state = S_IDLE;
 			default: r_next_state = S_IDLE;
 		endcase
 	end
